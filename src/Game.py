@@ -30,9 +30,9 @@ class Game:
                 
     def draw(self):
         self.screen.fill(BACKGROUND_COLOR)
-        map = Map.Map(self.screen)
-        map.draw()
-        player = Player.Player(self.screen)
+        map = Map.Map(self.screen) #create map
+        map.draw() # draw map
+        player = Player.Player(self.screen) #create and draw player
         pygame.display.flip()
     
     def update(self):
