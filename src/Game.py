@@ -1,19 +1,18 @@
 import pygame
 import sys
+import Map 
+import Player
 
+BACKGROUND_COLOR = 0x29222F
+SCREEN_WIDTH = 450
+SCREEN_HEIGHT = 800
 
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((600, 600))
-        pygame.display.set_caption("Gravity Tetris")   
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        pygame.display.set_caption("fantasy crawler")   
         self.clock = pygame.time.Clock()
-        
-        # self.board = Board(20, 20)
-        #self.current_piece = Tetriminoe.generate_piece
-        #self.next_piece = Tetriminoe.generate_piece()
-        self.gravity_direction = "DOWN"
-        self.score = 0
         self.running = True
         
     def start(self):
@@ -28,8 +27,12 @@ class Game:
             if event.type == pygame.QUIT:
                 self.running = False
                 sys.exit(0)
+                
     def draw(self):
-        self.screen.fill((0, 0, 0))
+        self.screen.fill(BACKGROUND_COLOR)
+        map = Map.Map(self.screen)
+        map.draw()
+        player = Player.Player(self.screen)
         pygame.display.flip()
     
     def update(self):
