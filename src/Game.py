@@ -7,6 +7,9 @@ BACKGROUND_COLOR = 0x29222F
 SCREEN_WIDTH = 450
 SCREEN_HEIGHT = 800
 
+#TODO: IMPLEMENT PLAYER COLLISIONS
+#TODO: BEGIN WORK ON ENEMIES
+
 class Game:
     def __init__(self):
         pygame.init()
