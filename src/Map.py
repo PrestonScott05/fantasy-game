@@ -4,7 +4,7 @@ WALL_COLOR = 0x35c2c0
 SCREEN_WIDTH = 450
 SCREEN_HEIGHT = 800
 
-class Map:
+class Map(object):
     def __init__(self, screen):
         self.grid = [
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],

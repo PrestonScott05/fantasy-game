@@ -16,10 +16,16 @@ class Game:
         self.running = True
         
     def start(self):
+        self.player = Player.Player(self.screen) #create player
+        self.map = Map.Map(self.screen) #create map
         while self.running:
             self.process_events()
-            self.update()
-            self.draw()
+            self.player.move() 
+        #draw game elements in layers -> things are drawn on top of each other in the order they are drawn
+            self.screen.fill(BACKGROUND_COLOR) 
+            self.map.draw()
+            self.player.draw()
+            pygame.display.flip()
             self.clock.tick(60) 
             
     def process_events(self):
@@ -27,16 +33,9 @@ class Game:
             if event.type == pygame.QUIT:
                 self.running = False
                 sys.exit(0)
-                
-    def draw(self):
-        self.screen.fill(BACKGROUND_COLOR)
-        map = Map.Map(self.screen) #create map
-        map.draw() # draw map
-        player = Player.Player(self.screen) #create and draw player
-        pygame.display.flip()
-    
-    def update(self):
-        pass
+
+        
+        
     
     
 if __name__ == "__main__":

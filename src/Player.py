@@ -7,25 +7,47 @@ SCREEN_HEIGHT = 800
 class Player(object):
     def __init__(self, screen):
         self.screen = screen
-        self.player_rect = py.Rect(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 10, 10) 
-         
+        self.speed = 3
+        self.alive = True
+        self.player_rect = py.Rect(SCREEN_WIDTH // 2, 200, 10, 10) 
+        
+        
+    def draw(self):
         py.draw.rect(self.screen, PLAYER_COLOR, self.player_rect)
-    
-    def move_player(self, player):
-        # TODO: Implement movement logic here
-        pass
+        
+    def move(self):
+        if self.alive:
+            x_direction, y_direction = self.handle_move_inputs()
+            self.player_rect.x += x_direction * self.speed
+            self.player_rect.y += y_direction * self.speed
     
     
     def handle_move_inputs(self):
         keys = py.key.get_pressed()
-        if keys[py.K_w]:
-            self.direction = (0, 1)
+
+    # handling for strafing        
+        if keys[py.K_w] and keys[py.K_a]:
+            return -1, -1
+        elif keys[py.K_w] and keys[py.K_d]:
+            return 1, -1
+        elif keys[py.K_s] and keys[py.K_a]:
+            return -1, 1
+        elif keys[py.K_s] and keys[py.K_d]:
+            return 1, 1
+    # handling for cardinal directions
+        elif keys[py.K_w]: 
+            return 0, -1
         elif keys[py.K_s]:
-            self.direction = (1, 0)
+            return 0, 1
         elif keys[py.K_a]:
-            self.direction = (-1, 0)
+            return -1, 0
         elif keys[py.K_d]:  
-            self.direction = (0, -1)
+            return 1, 0  
+    # no key pressed
+        else:
+            return 0, 0
             
-        return self.direction
+    
+    def kill(self):
+        self.alive = False
          
